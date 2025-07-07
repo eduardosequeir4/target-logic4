@@ -32,8 +32,8 @@ class BuyOrdersSink(Logic4Sink):
                 "ExpectedDeliveryDate": record.get("created_at")
             }
             
-            # If  send_OrderedOnDateByDistributor is not false, add it to payload
-            if self._config.get("send_OrderedOnDateByDistributor", True):
+            # If not send_OrderedOnDateByDistributor==false, add it to payload
+            if self._config.get("send_OrderedOnDateByDistributor", True) is not False:
                 line_item["OrderedOnDateByDistributor"] = created_at
             
             PurchaseOrderLines.append(line_item)
